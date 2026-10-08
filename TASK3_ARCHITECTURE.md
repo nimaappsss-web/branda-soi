@@ -2,7 +2,7 @@
 
 ## Component Architecture
 
-- **Single Responsibility**: Each component does one thing (one component per file - R1 from blueprint)
+- **Single Responsibility**: Each component does one thing (one component per file)
 - **Composition over inheritance**: Pages/layouts compose feature/shared components
 - **Presentational vs Container**: Feature components encapsulate domain logic; pages are thin compositions
 - **Reusability**: Shared primitives in `components/ui`, `components/shared` (Price, SkeletonCard); feature components specific to domain
@@ -12,10 +12,10 @@
 Feature-based with singular naming (`service/`):
 - `app/`: Route segments (App Router). Routes compose only; no component definitions in pages/layouts
 - `features/*`: Domain slices with `api/`, `components/`, `types/`, `utils/`
-- `components/`: Shared UI (layout, shared, ui, form, others)
+- `components/`: Shared UI (ui primitives, layout, shared, others)
 - `data/`: Mock/static data
 - `types/`: Global/shared types
-- `hooks/`, `lib/`, `utils/`, `config/`: Reusable utilities
+- `hooks/`, `lib/`: Reusable utilities (custom hooks, providers)
 
 Route groups not used; dynamic segment `[market]` at root gives subfolder routing (/ng,/us,/uk,/ca). Layouts at `[market]` level provide market-aware chrome.
 
@@ -23,20 +23,20 @@ Route groups not used; dynamic segment `[market]` at root gives subfolder routin
 
 - **Server State**: TanStack Query (caching, deduplication, staleTime/gcTime, devtools). Ready for API migration.
 - **Client State**: Zustand for cart (global, frequent updates, needs localStorage persistence). Selective subscriptions avoid re-renders. Persist middleware for localStorage.
-- **Forms**: React Hook Form + Zod for validation.
+- **Forms**: React Hook Form + Zod are installed and reserved for multi-field flows; the current checkout is an intentional single-button mock, so no form code ships yet.
 
 ## API & Service Layer
 
 - `features/*/api/`: Service layer functions (pure, testable) - e.g. `services.service.ts` with filtering/sorting/pagination logic
-- Barrel exports via `api/index.ts`
-- No raw fetch/axios in components - centralized in service layer
-- TanStack Query wrappers can wrap these when moving to real APIs
+- Barrel re-exports via `features/*/api/index.ts`
+- No raw fetch/axios in components - data access goes through the service layer
+- TanStack Query provider is wired up and ready to wrap these when moving to real APIs
 
 ## Form Handling & Validation
 
-- React Hook Form for form state (minimal re-renders)
-- Zod schemas for validation (type-safe)
-- shadcn/ui form primitives + thin wrappers in `components/form/` (one per file)
+- React Hook Form available for form state (minimal re-renders) when multi-field flows arrive
+- Zod schemas available for validation (type-safe)
+- shadcn/ui primitives in `components/ui/` cover inputs and selects today; the current flow needs no multi-field form screen
 
 ## Error Handling
 
@@ -48,14 +48,14 @@ Route groups not used; dynamic segment `[market]` at root gives subfolder routin
 
 ## Authentication & User State
 
-Current scope: no auth implemented. Structure supports role-based dashboards later: add `features/auth/`, protected routes via middleware/guards, session storage via cookies (existing `utils/storage.ts`), role-based access checks in layouts/middleware.
+Current scope: no auth implemented. Structure supports role-based dashboards later: add `features/auth/`, protected routes via middleware/guards, session storage via cookies, role-based access checks in layouts/middleware.
 
 ## Multi-Market, Multi-Currency, Localization
 
 - **Multi-market routing**: Dynamic `[market]` segment (ng/us/uk/ca) - subfolders preserve SEO. `generateStaticParams` for all markets.
 - **Multi-currency**: MarketConfig with currency code/symbol and exchangeRate (NGN base). `Price` component formats with `Intl.NumberFormat` per market. Cart stores unitPrice at add time.
 - **Localization**: Hero copy varies per market in config. Can extend with i18n (next-intl) if needed.
-- **SEO**: Dynamic `generateMetadata` per service (title/description/OG). Market subfolders give clean URLs. For hreflang, recommend adding `<link rel="alternate" hreflang="..." href="..." />` in market layout metadata or head (cover ng/us/uk/ca variants of each page).
+- **SEO**: Dynamic `generateMetadata` per service (title/description/OG) plus canonical and hreflang alternates (en-NG, en-US, en-GB, en-CA, en, x-default) generated from one helper (`features/market/utils/seo.ts`); `metadataBase` resolves every URL to absolute. Market subfolders give clean URLs.
 
 ## Responsive Design
 

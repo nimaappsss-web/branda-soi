@@ -37,6 +37,7 @@ export async function generateMetadata({
     openGraph: {
       title: service.name,
       description: service.description,
+      url: `/${market}/service/${slug}`,
       images: [service.images[0]],
     },
   };

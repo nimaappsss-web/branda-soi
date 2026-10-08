@@ -21,6 +21,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://branda-soi.vercel.app"),
   title: "Branda V2 — Branding Services Marketplace",
   description:
     "Digital, gifts, create, studio and print branding services for Nigeria, the US, the UK and Canada.",

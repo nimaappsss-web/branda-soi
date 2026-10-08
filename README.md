@@ -19,7 +19,7 @@ A responsive service ordering interface for Branda V2, built with Next.js 16 (Ap
 - **UI Components**: shadcn/ui (Base UI)
 - **State Management**: Zustand (cart, with persist)
 - **Data Fetching**: TanStack Query (installed, ready to extend)
-- **Forms/Validation**: React Hook Form, Zod
+- **Forms/Validation**: React Hook Form, Zod (installed)
 - **Utilities**: clsx, tailwind-merge, lucide-react, js-cookie, react-hot-toast, axios, dayjs
 
 ## Project Structure (Feature-Based)
@@ -142,11 +142,12 @@ npm run build
 
 ## Screenshots / Writeups
 
-Written parts of the screening task live in `docs/`:
+Written parts of the screening task:
 
-- `docs/TASK2-performance.md` - performance problem solving
-- `docs/TASK3-architecture.md` - architecture and code quality
-- `docs/TASK5-answers.md` - short answer questions
+- `TASK2_PERFORMANCE.md` - performance problem solving
+- `TASK3_ARCHITECTURE.md` - architecture and code quality
+- `TASK4_REVIEW.md` - website and product review (www.branda.com.ng)
+- `TASK5_ANSWERS.md` - short answer questions
 
 ## Deployment
 
