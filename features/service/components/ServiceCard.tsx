@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Clock } from "lucide-react";
+import toast from "react-hot-toast";
+import { ArrowRight, Clock, ShoppingCart } from "lucide-react";
 import { Service, MarketCode } from "@/types/brand";
 import { Price } from "@/components/shared/Price";
+import { useCartStore } from "@/features/cart/store/useCartStore";
 import { cn } from "@/lib/utils";
 
 interface ServiceCardProps {
@@ -14,10 +16,24 @@ interface ServiceCardProps {
 }
 
 export const ServiceCard = ({ service, market, className }: ServiceCardProps) => {
+  const addToCart = useCartStore((state) => state.add);
   const hasDiscount = service.discountPct && service.discountPct > 0;
   const discountedPrice = hasDiscount
     ? service.basePrice * (1 - service.discountPct! / 100)
     : service.basePrice;
+
+  const handleAddToCart = () => {
+    addToCart({
+      serviceId: service.id,
+      slug: service.slug,
+      name: service.name,
+      image: service.images[0],
+      unitPrice: discountedPrice,
+      quantity: 1,
+      category: service.category,
+    });
+    toast.success(`${service.name} added to cart`);
+  };
 
   return (
     <div
@@ -70,13 +86,24 @@ export const ServiceCard = ({ service, market, className }: ServiceCardProps) =>
           )}
         </div>
 
-        <Link
-          href={`/${market}/service/${service.slug}`}
-          className="mt-4 inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-xl border border-border/60 bg-secondary/60 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
-        >
-          View Details
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+        <div className="mt-4 flex items-center gap-2">
+          <Link
+            href={`/${market}/service/${service.slug}`}
+            className="inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-border/60 bg-secondary/60 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            View Details
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            aria-label={`Add ${service.name} to cart`}
+            title="Add to cart"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border/60 bg-secondary/60 text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            <ShoppingCart className="h-4 w-4" />
+          </button>
+        </div>
       </div>
     </div>
   );

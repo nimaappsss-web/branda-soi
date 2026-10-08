@@ -2,7 +2,7 @@ import { MarketCode } from "@/types/brand";
 import { getMarketConfig } from "@/features/market/config/markets";
 
 interface PriceProps {
-  amount: number; // base amount (NGN)
+  amount: number;
   marketCode: MarketCode;
   className?: string;
 }

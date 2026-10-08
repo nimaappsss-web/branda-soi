@@ -1,4 +1,4 @@
-export const TAX_RATE = 0.075; // 7.5% flat tax
+export const TAX_RATE = 0.075;
 
 export const calculatePricing = (items: Array<{ unitPrice: number; quantity: number }>) => {
   const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);

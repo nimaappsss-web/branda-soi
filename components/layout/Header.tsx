@@ -14,7 +14,9 @@ export const Header = () => {
   const params = useParams();
   const pathname = usePathname();
   const market = params.market as MarketCode;
-  const itemCount = useCartStore((state) => state.getItemCount());
+  const itemCount = useCartStore(
+    (state) => state.items.reduce((count, item) => count + item.quantity, 0),
+  );
   const [open, setOpen] = useState(false);
   const [closing, setClosing] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -127,10 +129,8 @@ export const Header = () => {
         </div>
       </header>
 
-      {/* Mobile spacer (floating logo/menu sit over this) */}
       <div aria-hidden className="h-[76px] md:hidden" />
 
-      {/* Floating mobile logo */}
       <Link
         href={`/${market}`}
         aria-label="Branda home"
@@ -143,7 +143,6 @@ export const Header = () => {
         <span className="text-sm font-bold tracking-tight">Branda</span>
       </Link>
 
-      {/* Floating mobile menu button */}
       <button
         type="button"
         onClick={() => (open && !closing ? closeMenu() : openMenu())}
@@ -169,7 +168,6 @@ export const Header = () => {
         />
       </button>
 
-      {/* Mobile full-screen menu */}
       {(open || closing) && (
         <div
           role="dialog"
@@ -212,7 +210,6 @@ export const Header = () => {
             ))}
           </nav>
 
-          {/* Bottom CTAs */}
           <div
             className={`flex shrink-0 flex-col gap-3 border-t border-primary-foreground/10 px-6 pt-5 pb-8 fill-mode-both duration-300 ${
               closing ? "animate-out fade-out-0" : "animate-in fade-in-0 slide-in-from-bottom-4"

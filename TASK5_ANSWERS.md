@@ -2,7 +2,7 @@
 
 ## 1. Describe a frontend project you have worked on that involved significant traffic, complex functionality, or a large user base. What was your role?
 
-In a prior role, I contributed to a multi-tenant web application serving thousands of users with complex role-based access, forms, and reporting. My role was frontend engineer (React/TypeScript), responsible for building reusable components, state management, API integration, and performance optimizations. I focused on responsive UI, form validation, and reducing bundle size while working closely with backend/API teams.
+In a prior role, I contributed to a multi-tenant web application called Talora website is www.taloraagency.com and this averages a trafific of 80 to 100 thousand monthly, serving hundred of thousands of users with complex role-based access, forms, and reporting. My role was Senior frontend engineer (Next js/TypeScript), responsible for building reusable components, state management, API integration, and performance optimizations. I focused on responsive UI, form validation, and reducing bundle size while working closely with backend/API teams.
 
 ## 2. Which frontend technologies and frameworks are you strongest in, and why? Include your experience with Next.js.
 

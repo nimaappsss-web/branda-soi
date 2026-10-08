@@ -27,7 +27,7 @@ export interface Service {
   description: string;
   category: Category;
   images: string[];
-  basePrice: number; // NGN base reference
+  basePrice: number;
   discountPct?: number;
   whatIsIncluded: string[];
   turnaround: string;
@@ -58,7 +58,7 @@ export interface MarketConfig {
   flag: string;
   currency: Currency;
   symbol: string;
-  exchangeRate: number; // relative to NGN base (NGN=1.0)
+  exchangeRate: number;
   heroTitle: string;
   heroSubtitle: string;
   featuredSlugs: string[];

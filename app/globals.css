@@ -135,8 +135,6 @@
   }
 }
 
-/* Canonical container — mirrors popin's .container (max-w 1440, responsive gutter).
-   Unlayered on purpose: it must win over Tailwind's built-in .container and any px-* utility. */
 .container {
   max-width: 1440px;
   margin: 0 auto;

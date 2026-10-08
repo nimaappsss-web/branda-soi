@@ -53,8 +53,6 @@ data/                           # Mock services data
 types/                          # Shared types (brand.ts)
 ```
 
-All components follow "one component per file" rule. Pages compose only existing components.
-
 ## Getting Started
 
 ### Prerequisites
