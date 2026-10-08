@@ -4,6 +4,7 @@ export const marketsConfig: Record<MarketCode, MarketConfig> = {
   ng: {
     code: 'ng',
     country: 'Nigeria',
+    flag: '🇳🇬',
     currency: 'NGN',
     symbol: '₦',
     exchangeRate: 1.0,
@@ -14,6 +15,7 @@ export const marketsConfig: Record<MarketCode, MarketConfig> = {
   us: {
     code: 'us',
     country: 'United States',
+    flag: '🇺🇸',
     currency: 'USD',
     symbol: '$',
     exchangeRate: 0.00065, // approx NGN to USD (mock)
@@ -24,6 +26,7 @@ export const marketsConfig: Record<MarketCode, MarketConfig> = {
   uk: {
     code: 'uk',
     country: 'United Kingdom',
+    flag: '🇬🇧',
     currency: 'GBP',
     symbol: '£',
     exchangeRate: 0.0005, // approx NGN to GBP (mock)
@@ -34,6 +37,7 @@ export const marketsConfig: Record<MarketCode, MarketConfig> = {
   ca: {
     code: 'ca',
     country: 'Canada',
+    flag: '🇨🇦',
     currency: 'CAD',
     symbol: 'C$',
     exchangeRate: 0.00088, // approx NGN to CAD (mock)

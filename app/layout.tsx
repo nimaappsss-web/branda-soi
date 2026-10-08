@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ReactQueryProvider } from "@/lib/react-query";
 import { ToasterClient } from "@/components/ToasterClient";
@@ -15,9 +15,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-display",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Branda Soi",
-  description: "Branda Soi",
+  title: "Branda V2 — Branding Services Marketplace",
+  description:
+    "Digital, gifts, create, studio and print branding services for Nigeria, the US, the UK and Canada.",
 };
 
 export default function RootLayout({
@@ -28,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ReactQueryProvider>
           <TooltipProvider>

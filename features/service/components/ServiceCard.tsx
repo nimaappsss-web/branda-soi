@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight, Clock } from "lucide-react";
 import { Service, MarketCode } from "@/types/brand";
 import { Price } from "@/components/shared/Price";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 interface ServiceCardProps {
@@ -21,41 +20,64 @@ export const ServiceCard = ({ service, market, className }: ServiceCardProps) =>
     : service.basePrice;
 
   return (
-    <Card className={cn("flex flex-col", className)}>
-      <div className="relative aspect-video w-full overflow-hidden rounded-t-lg">
+    <div
+      className={cn(
+        "group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-colors hover:border-primary/40",
+        className,
+      )}
+    >
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
         <Image
           src={service.images[0]}
           alt={service.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-          className="object-cover transition-transform hover:scale-105"
+          className="object-cover"
         />
+        <span className="absolute left-3 top-3 rounded-full bg-background px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-foreground">
+          {service.category}
+        </span>
         {hasDiscount && (
-          <span className="absolute left-2 top-2 rounded-full bg-destructive px-2 py-1 text-xs text-destructive-foreground">
+          <span className="absolute right-3 top-3 rounded-full bg-destructive px-2.5 py-1 text-xs font-bold text-destructive-foreground">
             {service.discountPct}% OFF
           </span>
         )}
       </div>
-      <CardContent className="flex-1 p-4">
-        <h3 className="line-clamp-2 text-base font-semibold">{service.name}</h3>
-        <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+
+      <div className="flex flex-1 flex-col p-5">
+        <h3 className="line-clamp-1 text-lg font-bold transition-colors group-hover:text-primary">
+          {service.name}
+        </h3>
+        <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
           {service.description}
         </p>
-        <div className="mt-3 flex items-baseline gap-2">
-          <Price amount={discountedPrice} marketCode={market} className="text-lg font-bold" />
+
+        <div className="mt-3 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+          <Clock className="h-3.5 w-3.5" />
+          {service.turnaround}
+        </div>
+
+        <div className="mt-4 flex items-baseline gap-2">
+          <Price
+            amount={discountedPrice}
+            marketCode={market}
+            className="font-heading text-xl font-bold"
+          />
           {hasDiscount && (
             <span className="text-sm text-muted-foreground line-through">
               <Price amount={service.basePrice} marketCode={market} />
             </span>
           )}
         </div>
-        <div className="mt-2 text-xs text-muted-foreground">{service.turnaround}</div>
-      </CardContent>
-      <CardFooter className="p-4 pt-0">
-        <Link href={`/${market}/service/${service.slug}`} className="w-full">
-          <Button className="w-full">View Details</Button>
+
+        <Link
+          href={`/${market}/service/${service.slug}`}
+          className="mt-4 inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-xl border border-border/60 bg-secondary/60 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+        >
+          View Details
+          <ArrowRight className="h-4 w-4" />
         </Link>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 };

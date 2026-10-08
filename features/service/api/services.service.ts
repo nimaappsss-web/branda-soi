@@ -1,7 +1,7 @@
 import { mockServices } from '@/data/mock-services';
 import { filterAndSortServices, paginateServices } from '@/features/service/utils/filters';
 import { ServiceFilters, PaginatedServices } from '@/features/service/types';
-import { Service } from '@/types/brand';
+import { Category, Service } from '@/types/brand';
 
 export const getServices = (filters: ServiceFilters): PaginatedServices => {
   const filtered = filterAndSortServices(mockServices, filters);
@@ -25,3 +25,16 @@ export const getRelatedServices = (service: Service): Service[] => {
     (s) => s.category === service.category && s.id !== service.id,
   ).slice(0, 4);
 };
+
+export const getServicesBySlugs = (slugs: string[]): Service[] =>
+  slugs
+    .map((slug) => getServiceBySlug(slug))
+    .filter((service): service is Service => Boolean(service));
+
+export const getCategoryCounts = (): Partial<Record<Category, number>> =>
+  mockServices.reduce<Partial<Record<Category, number>>>((counts, service) => {
+    counts[service.category] = (counts[service.category] ?? 0) + 1;
+    return counts;
+  }, {});
+
+export const getServiceCount = (): number => mockServices.length;

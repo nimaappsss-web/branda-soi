@@ -1,5 +1,8 @@
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import { MarketCode } from '@/types/brand';
 import { getServiceBySlug, getRelatedServices } from '@/features/service/api/services.service';
+import { buildAlternates } from '@/features/market/utils/seo';
 import { notFound } from 'next/navigation';
 import { ImageGallery } from '@/features/service-detail/components/ImageGallery';
 import { DetailHeader } from '@/features/service-detail/components/DetailHeader';
@@ -30,6 +33,7 @@ export async function generateMetadata({
   return {
     title: `${service.name} | Branda V2 (${market.toUpperCase()})`,
     description: service.description,
+    alternates: buildAlternates(market as MarketCode, `/service/${slug}`),
     openGraph: {
       title: service.name,
       description: service.description,
@@ -52,20 +56,30 @@ export default async function ServiceDetailPage({
   const marketCode = market as MarketCode;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid gap-8 lg:grid-cols-2">
-        <div>
+    <div className="container px-4 py-8 md:py-10">
+      <Link
+        href={`/${marketCode}/service`}
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        All services
+      </Link>
+
+      <div className="mt-6 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
+        <div className="lg:sticky lg:top-24 lg:self-start">
           <ImageGallery images={service.images} name={service.name} />
         </div>
+
         <div className="space-y-6">
           <DetailHeader service={service} market={marketCode} />
           <WhatIsIncluded items={service.whatIsIncluded} />
-          <ServiceOptions service={service} />
+          <ServiceOptions service={service} market={marketCode} />
           <QuantitySelector />
           <CartActions service={service} market={marketCode} />
         </div>
       </div>
-      <div className="mt-12">
+
+      <div className="mt-16 border-t border-border/60 pt-12">
         <RelatedServices services={related} market={marketCode} />
       </div>
     </div>

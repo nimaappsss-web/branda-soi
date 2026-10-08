@@ -135,6 +135,32 @@ npx tsc --noEmit
 npm run build
 ```
 
+## SEO & Localization
+
+- Subfolder routing `/[market]/...` keeps one domain per market (no subdomains)
+- `generateMetadata` on home, listing and service detail (title, description, Open Graph)
+- Canonical + hreflang alternates (en-NG, en-US, en-GB, en-CA, en, x-default) generated from one helper: `features/market/utils/seo.ts`
+- Server-rendered HTML, semantic headings, alt text on images
+
+## Screenshots / Writeups
+
+Written parts of the screening task live in `docs/`:
+
+- `docs/TASK2-performance.md` - performance problem solving
+- `docs/TASK3-architecture.md` - architecture and code quality
+- `docs/TASK5-answers.md` - short answer questions
+
 ## Deployment
 
 Ready for Vercel or any Next.js host. No special environment variables required for mock data.
+
+```bash
+# Vercel
+npx vercel
+```
+
+## Submission
+
+- GitHub repository: <repo link>
+- Live deployment: <deployment link>
+- Email: brandamgt@gmail.com (subject: Frontend Developer Screening | Full Name)

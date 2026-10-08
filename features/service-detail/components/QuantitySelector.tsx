@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -30,20 +31,31 @@ export const QuantitySelector = ({ initial = 1 }: QuantitySelectorProps) => {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold">Quantity</h2>
-      <div className="mt-2 flex items-center gap-2">
-        <Button variant="outline" size="sm" onClick={decrease}>
-          -
+      <h2 className="text-lg font-bold">Quantity</h2>
+      <div className="mt-3 inline-flex items-center gap-1 rounded-xl border border-border/60 bg-card p-1.5">
+        <Button
+          variant="outline"
+          size="icon-sm"
+          onClick={decrease}
+          aria-label="Decrease quantity"
+        >
+          <Minus />
         </Button>
         <Input
           type="number"
           value={quantity}
           onChange={handleChange}
-          className="w-20"
+          className="h-8 w-16 border-0 bg-transparent text-center focus-visible:ring-0"
           min={1}
+          aria-label="Quantity"
         />
-        <Button variant="outline" size="sm" onClick={increase}>
-          +
+        <Button
+          variant="outline"
+          size="icon-sm"
+          onClick={increase}
+          aria-label="Increase quantity"
+        >
+          <Plus />
         </Button>
       </div>
     </div>

@@ -29,7 +29,7 @@ export default async function MarketLayout({
     <div className="flex min-h-screen flex-col">
       <Header />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer market={market as MarketCode} />
     </div>
   );
 }

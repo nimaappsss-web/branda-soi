@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from 'next/navigation';
+import { ArrowRight, ShoppingCart } from 'lucide-react';
 import { Service, MarketCode } from '@/types/brand';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/features/cart/store/useCartStore';
@@ -38,11 +39,20 @@ export const CartActions = ({ service, market }: CartActionsProps) => {
 
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
-      <Button onClick={handleAddToCart} className="flex-1" variant="outline">
+      <Button
+        onClick={handleAddToCart}
+        variant="outline"
+        className="h-11 flex-1 border-border/60 bg-card text-base hover:bg-secondary"
+      >
+        <ShoppingCart />
         Add to Cart
       </Button>
-      <Button onClick={handleOrderNow} className="flex-1">
+      <Button
+        onClick={handleOrderNow}
+        className="h-11 flex-1 text-base"
+      >
         Order Now
+        <ArrowRight />
       </Button>
     </div>
   );

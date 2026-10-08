@@ -55,6 +55,7 @@ export interface CartItem {
 export interface MarketConfig {
   code: MarketCode;
   country: string;
+  flag: string;
   currency: Currency;
   symbol: string;
   exchangeRate: number; // relative to NGN base (NGN=1.0)
