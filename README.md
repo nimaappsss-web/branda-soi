@@ -159,6 +159,6 @@ npx vercel
 
 ## Submission
 
-- GitHub repository: <repo link>
-- Live deployment: <deployment link>
+- GitHub repository: https://github.com/nimaappsss-web/branda-soi
+- Live deployment: https://branda-soi.vercel.app
 - Email: brandamgt@gmail.com (subject: Frontend Developer Screening | Full Name)
